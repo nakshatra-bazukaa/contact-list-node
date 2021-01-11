@@ -3,6 +3,8 @@ const path = require('path');
 
 const port = 8000;
 
+const db = require('./config/mongoose');
+
 const app = express();
 
 // To select view engine
