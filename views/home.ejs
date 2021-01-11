@@ -10,10 +10,17 @@
         <div>
             <ul>
                 <% for(let i = 0; i<contact_list.length; i++){ %>
-                    <li>
-                        <p><%= contact_list[i].name %></p>
-                        <p><%= contact_list[i].phone %></p>
-                    </li>
+                    <div class="details">
+                        <li>
+                            <p><%= contact_list[i].name %></p>
+                            <p><%= contact_list[i].phone %></p>
+                        </li>
+                    </div>
+                    <div class="delete-button">
+                        <a href="/delete-contact/<%= contact_list[i].phone %>">
+                            <button>Delete</button>
+                        </a>
+                    </div>
                 <% } %>
             </ul>
         </div>
