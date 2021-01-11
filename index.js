@@ -5,9 +5,14 @@ const port = 8000;
 
 const app = express();
 
+// To select view engine
 app.set('view engine", "ejs');
+// To setup views folder for rendering
 app.set('views', path.join(__dirname, 'views'));
+// To parse the objects
 app.use(express.urlencoded());
+// To use css, js, images etc from the assets i.e static content
+app.use(express.static('assets'));
 
 const contact_list = []
 
