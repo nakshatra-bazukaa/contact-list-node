@@ -1,8 +1,27 @@
 <html>
     <head>
-
+        <title>
+            <%= title %>
+        </title>
     </head>
     <body>
-        <h1>Rendered from ejs views</h1>
+        <h1><%= title %></h1>
+        <div>
+            <ul>
+                <% for(let i = 0; i<contact_list.length; i++){ %>
+                    <li>
+                        <p><%= contact_list[i].name %></p>
+                        <p><%= contact_list[i].phone %></p>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+
+        <form action="/create-contact" method="POST">
+            <input type="text" name="name" placeholder="Enter name">
+            <input type="number" name="phone" placeholder="Enter phone">
+
+            <button type="submit">Add Contact</button>
+        </form>
     </body>
 </html>
