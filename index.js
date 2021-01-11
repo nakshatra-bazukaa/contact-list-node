@@ -17,27 +17,36 @@ app.use(express.urlencoded());
 // To use css, js, images etc from the assets i.e static content
 app.use(express.static('assets'));
 
-const contact_list = []
-
 app.get('/', (req, res) => {
-    return res.render('home.ejs', {
-        title: 'My Contacts List',
-        contact_list: contact_list
-    });
+    Contact.find({}, (err, contacts) => {
+        if(err)
+            console.log('Error in fetching contacts from db');
+        else
+            return res.render('home.ejs', {
+                title: 'My Contacts List',
+                contact_list: contacts
+            });
+    })
 })
 
 app.post('/create-contact', (req, res) => {
-    contact_list.push(req.body);
-    return res.redirect('back');
+    Contact.create(req.body, (err, newContact) => {
+        if(err)
+            console.log('error in creating a contact!');
+        else
+            console.log('***********', newContact);
+
+        return res.redirect('back');
+    })
 });
 
-app.get('/delete-contact/:phone', (req, res) => {
-    let contactIndex = contact_list.findIndex(contact => contact.phone == req.params.phone);
+app.get('/delete-contact/:id', (req, res) => {
+    Contact.findByIdAndDelete(req.params.id, (err) => {
+        if(err)
+            console.log('error in deleting an object i the db');
+        return res.redirect('back');
+    });
     
-    if(contactIndex != -1)
-        contact_list.splice(contactIndex, 1);
-
-    return res.redirect('back');
 })
 
 app.listen(port, err => {
