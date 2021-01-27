@@ -40,7 +40,7 @@ app.post('/create-contact', (req, res) => {
 });
 
 app.get('/delete-contact/:id', (req, res) => {
-    Contact.findByIdAndDelete(req.params.id, (err) => {
+    Contact.findByIdAndDelete(req.params.id, err => {
         if(err)
             console.log('error in deleting an object i the db');
         return res.redirect('back');
